@@ -15,13 +15,13 @@ let page1 = [
   { content1: "This is an example page." },
   { content2: "It contains sample data." },
   { content3: "You can modify it as needed." },
-  {
-    link: {
-      yes: true,
-      text: "Click to proceed",
-      href: "www.vedomosti.ru",
-    },
-  },
+  //   {
+  //     link: {
+  //       yes: true,
+  //       text: "Click to proceed",
+  //       href: "www.vedomosti.ru",
+  //     },
+  //   },
 ];
 
 let page2 = [
@@ -31,17 +31,35 @@ let page2 = [
   { content3: "Enjoy coding!" },
 ];
 
-let page3 = [
-  { title: "Final Page" },
-  { content1: "This is the final example page." },
-  { content2: "Thank you for visiting." },
-  { content3: "Goodbye!" },
+let page3 = {};
+page3.title = "Final Page";
+page3.content = [
+  "This is the final example page.",
+  "Thank you for visiting.",
+  "Goodbye!",
 ];
 
 pages.content.push(page1);
 pages.content.push(page2);
 pages.content.push(page3);
 
-for (let i = 0; i < pages.content[0].length; i++) {
-  console.log(pages.content[0][i]);
+target = document.getElementById("content");
+
+let elements = [];
+
+if (page3.title) {
+  let el = document.createElement("h3");
+  el.textContent = page3.title;
+  el.classList.add("title");
+  elements.push(el);
 }
+
+for (let i=0;i<page3.content.length;i++) {
+  let el = document.createElement("p");
+  el.textContent = page3.content[i];
+  el.classList.add("paragraph");
+  elements.push(el);
+}
+
+console.log(elements);
+elements.forEach((el) => document.querySelector(".content").appendChild(el));
