@@ -165,6 +165,19 @@ class SwipeDetector {
           this.onSwipeDown();
         }
       }
+      // Check for horizontal swipes
+      else if (
+        Math.abs(this.distX) >= this.threshold &&
+        Math.abs(this.distY) <= this.restraint
+      ) {
+        if (this.distX < 0) {
+          // Swipe left
+          this.onSwipeLeft();
+        } else {
+          // Swipe right
+          this.onSwipeRight();
+        }
+      }
     }
   }
 
@@ -178,6 +191,18 @@ class SwipeDetector {
     console.log("Swipe DOWN detected!");
     // Add your swipe down functionality here
     this.showSwipeMessage("Swiped DOWN! 👇");
+  }
+
+  onSwipeLeft() {
+    console.log("Swipe LEFT detected!");
+    // Add your swipe left functionality here
+    this.showSwipeMessage("Swiped LEFT! 👈");
+  }
+
+  onSwipeRight() {
+    console.log("Swipe RIGHT detected!");
+    // Add your swipe right functionality here
+    this.showSwipeMessage("Swiped RIGHT! 👉");
   }
 
   showSwipeMessage(message) {
