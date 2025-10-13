@@ -2,6 +2,9 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
 }
 
 .main {
@@ -28,7 +31,26 @@ body {
 .title,
 .paragraph {
     margin: 10px;
-    padding: 0;
+    padding: 10px;
     border: 1px solid green;
     text-align: center;
+    font-size: 16px;
+    min-height: 20px;
+    word-wrap: break-word;
+}
+
+/* Mobile-specific styles */
+@media screen and (max-width: 768px) {
+
+    .title,
+    .paragraph {
+        font-size: 18px;
+        margin: 8px;
+        padding: 12px;
+    }
+
+    .content {
+        width: 98%;
+        padding: 10px;
+    }
 }

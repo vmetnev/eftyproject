@@ -43,7 +43,7 @@ pages.content.push(page1);
 pages.content.push(page2);
 pages.content.push(page3);
 
-target = document.getElementById("content");
+target = document.querySelector(".content");
 
 let elements = [];
 
@@ -54,7 +54,7 @@ if (page3.title) {
   elements.push(el);
 }
 
-for (let i=0;i<page3.content.length;i++) {
+for (let i = 0; i < page3.content.length; i++) {
   let el = document.createElement("p");
   el.textContent = page3.content[i];
   el.classList.add("paragraph");
