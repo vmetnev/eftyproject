@@ -92,6 +92,132 @@ window.addEventListener("orientationchange", () => {
 // Force initial calculation
 setMobileViewportHeight();
 
+// Screen rotation detection
+class RotationDetector {
+  constructor() {
+    this.currentOrientation = this.getOrientation();
+    this.init();
+  }
+
+  init() {
+    // Listen for orientation change events
+    window.addEventListener("orientationchange", () => {
+      // Delay to allow for orientation change to complete
+      setTimeout(() => {
+        this.handleOrientationChange();
+      }, 100);
+    });
+
+    // Also listen for resize events as backup (some devices use resize instead of orientationchange)
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        this.handleOrientationChange();
+      }, 200);
+    });
+  }
+
+  getOrientation() {
+    // Check screen orientation
+    if (screen.orientation) {
+      return screen.orientation.angle;
+    } else if (window.orientation !== undefined) {
+      return window.orientation;
+    } else {
+      // Fallback: determine by window dimensions
+      return window.innerWidth > window.innerHeight ? 90 : 0;
+    }
+  }
+
+  getOrientationName(angle) {
+    switch (angle) {
+      case 0:
+        return "Portrait";
+      case 90:
+        return "Landscape Left";
+      case -90:
+      case 270:
+        return "Landscape Right";
+      case 180:
+        return "Portrait Upside Down";
+      default:
+        return window.innerWidth > window.innerHeight
+          ? "Landscape"
+          : "Portrait";
+    }
+  }
+
+  handleOrientationChange() {
+    const newOrientation = this.getOrientation();
+    const orientationName = this.getOrientationName(newOrientation);
+
+    // Only trigger if orientation actually changed
+    if (newOrientation !== this.currentOrientation) {
+      console.log(
+        `Screen rotated from ${this.getOrientationName(
+          this.currentOrientation
+        )} to ${orientationName}`
+      );
+
+      this.onRotationChange(orientationName, newOrientation);
+      this.currentOrientation = newOrientation;
+    }
+  }
+
+  onRotationChange(orientationName, angle) {
+    // Get appropriate emoji for orientation
+    let emoji;
+    switch (orientationName) {
+      case "Portrait":
+        emoji = "📱";
+        break;
+      case "Landscape Left":
+        emoji = "📱↪️";
+        break;
+      case "Landscape Right":
+        emoji = "📱↩️";
+        break;
+      case "Portrait Upside Down":
+        emoji = "🙃📱";
+        break;
+      default:
+        emoji = "🔄";
+    }
+
+    this.showRotationMessage(`Rotated to ${orientationName}! ${emoji}`);
+  }
+
+  showRotationMessage(message) {
+    // Create a temporary message element (same style as swipe messages)
+    const messageEl = document.createElement("div");
+    messageEl.textContent = message;
+    messageEl.style.cssText = `
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 100, 200, 0.9);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-size: 18px;
+      z-index: 1000;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    `;
+
+    document.body.appendChild(messageEl);
+
+    // Remove message after 1.5 seconds (slightly longer for rotation messages)
+    setTimeout(() => {
+      if (messageEl.parentNode) {
+        messageEl.parentNode.removeChild(messageEl);
+      }
+    }, 1500);
+  }
+}
+
 // Swipe detection for iPhone and mobile devices
 class SwipeDetector {
   constructor(element) {
@@ -234,11 +360,15 @@ class SwipeDetector {
   }
 }
 
-// Initialize swipe detection on the main element
+// Initialize swipe detection and rotation detection
 document.addEventListener("DOMContentLoaded", () => {
   const mainElement = document.querySelector(".main");
   if (mainElement) {
     const swipeDetector = new SwipeDetector(mainElement);
     console.log("Swipe detection initialized on .main element");
   }
+
+  // Initialize rotation detection
+  const rotationDetector = new RotationDetector();
+  console.log("Rotation detection initialized");
 });
