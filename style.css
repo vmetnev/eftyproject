@@ -10,9 +10,6 @@ body {
 .main {
     border: 1px solid red;
     width: 100%;
-    /* Use dynamic viewport height for mobile compatibility */
-    height: 100dvh;
-    /* Dynamic viewport height - preferred for modern browsers */
     height: 100vh;
     /* Fallback for older browsers */
     box-sizing: border-box;
@@ -47,7 +44,9 @@ body {
 @media screen and (max-width: 768px) {
     .main {
         /* Use JavaScript-calculated height for better mobile support */
-        height: calc(var(--vh, 1vh) * 100);
+        height: calc(var(--vh, 1vh) * 100) !important;
+        /* Remove border on mobile to ensure perfect fit */
+        /* border: none; */
     }
 
     .title,

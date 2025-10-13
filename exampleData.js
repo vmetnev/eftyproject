@@ -70,11 +70,24 @@ function setMobileViewportHeight() {
   const vh = window.innerHeight * 0.01;
   // Set CSS custom property
   document.documentElement.style.setProperty("--vh", `${vh}px`);
+
+  // Debug logging for mobile
+  console.log("Viewport height set:", window.innerHeight, "vh unit:", vh);
 }
 
 // Set initial height
-setMobileViewportHeight();
+document.addEventListener("DOMContentLoaded", setMobileViewportHeight);
 
-// Update on resize and orientation change
-window.addEventListener("resize", setMobileViewportHeight);
-window.addEventListener("orientationchange", setMobileViewportHeight);
+// Update on resize and orientation change with debouncing
+let resizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(setMobileViewportHeight, 100);
+});
+
+window.addEventListener("orientationchange", () => {
+  setTimeout(setMobileViewportHeight, 500); // Delay for orientation change
+});
+
+// Force initial calculation
+setMobileViewportHeight();
