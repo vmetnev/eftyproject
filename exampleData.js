@@ -63,3 +63,18 @@ for (let i = 0; i < page3.content.length; i++) {
 
 console.log(elements);
 elements.forEach((el) => document.querySelector(".content").appendChild(el));
+
+// Fix viewport height for mobile devices (especially iPhone)
+function setMobileViewportHeight() {
+  // Get the actual viewport height
+  const vh = window.innerHeight * 0.01;
+  // Set CSS custom property
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+}
+
+// Set initial height
+setMobileViewportHeight();
+
+// Update on resize and orientation change
+window.addEventListener("resize", setMobileViewportHeight);
+window.addEventListener("orientationchange", setMobileViewportHeight);
