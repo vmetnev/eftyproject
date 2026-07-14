@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Zalando+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Basic HTML meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title and Description -->
+    <title>Eftychia mou</title>
+    <meta name="description" content="Web site dedicated to Eftychia. The one that I loved and deeply cared for.">
+
+    <!-- Robots (controls indexing and crawling) -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://eftymou.com/">
+
+    <!-- Language -->
+    <meta http-equiv="Content-Language" content="en">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.png" type="image/png">
+
+    <!-- Open Graph (for social sharing and preview cards) -->
+    <meta property="og:title" content="Eftymou site">
+    <meta property="og:description" content="Site dedicated to Eftychia.">
+    <meta property="og:url" content="https://eftymou.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://eftymou.com/og-preview.jpg">
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-657LFYZCBH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-657LFYZCBH');
+    </script>
+
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');
+    </script>
+
+</head>
+
+<body>
+    <main class="main">
+        <div class="blocks block1">
+            <div class="photo-holder"> <img src="1%20September%20Photo.JPEG" alt="" class="photo">
+                <h5 class="m1">This site is</h5>
+                <h5 class="m11">dedicated to Eftychia ...</h5>
+                <h5 class="m2">...the one that I loved </h5>
+                <h5 class="m22">and deeply cared for</h5>
+
+
+
+                <h5 class="m4">May 2024 - April 2025</h5>
+                <a class="phone-link" target="_blank" href="tel:+35794099235"><img src="whatsapp.png" alt="Phone Icon"
+                        class="phone-icon">
+                    Call me...
+                </a>
+
+
+
+
+            </div>
+        </div>
+        <!-- <div class="blocks block2"></div>
+        <div class="blocks block3"></div> -->
+
+
+
+
+    </main>
+    <script src="index.js"></script>
+    <audio id="myAudio" src="Ludovico.mp3"></audio>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-657LFYZCBH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-657LFYZCBH');
+    </script>
+
+    <script>
+        let service = "stop"
+        const audio = document.getElementById('myAudio');
+
+        function initAudio() {
+
+            if (service === "stop") {
+                audio.play();
+                service = "play"
+
+                document.body.removeEventListener('touchstart', initAudio, {
+                    once: true
+                });
+                document.body.removeEventListener('click', initAudio, {
+                    once: true
+                });
+
+
+                setTimeout(() => {
+                    audio.currentTime = 0;
+                    document.body.addEventListener('touchstart', initAudio, {
+                        once: true
+                    });
+                    document.body.addEventListener('click', initAudio, {
+                        once: true
+                    });
+                }, 2000);
+
+
+            } else {
+                audio.pause();
+                service = "stop"
+                audio.currentTime = 0;
+
+                document.body.removeEventListener('touchstart', initAudio, {
+                    once: true
+                });
+                document.body.removeEventListener('click', initAudio, {
+                    once: true
+                });
+
+
+                setTimeout(() => {
+                    audio.currentTime = 0;
+                    document.body.addEventListener('touchstart', initAudio, {
+                        once: true
+                    });
+                    document.body.addEventListener('click', initAudio, {
+                        once: true
+                    });
+                }, 2000);
+            }
+        }
+
+        document.body.addEventListener('touchstart', initAudio, {
+            once: true
+        });
+        document.body.addEventListener('click', initAudio, {
+            once: true
+        });
+    </script>
+
+
+</body>
+
+
+</html>
