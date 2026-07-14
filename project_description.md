@@ -15,7 +15,7 @@ after 2 second of wait the messages are fading out (2 sec) while the picture is 
 
 After 2 sec wait it starts showing message4 in white color of font positioned at the bottom of the picture with some padding from the bottom and from the left
 
-that it stays this way
+And it stays this way
 
 
 
